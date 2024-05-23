@@ -7,7 +7,7 @@
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{__('Dashboard')}}</a></li>
                 <li class="breadcrumb-item active">{{ __('Resource') }}</li>
                 <li class="breadcrumb-item"><a href="{{ route('post.index') }}">{{__('Post')}}</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('post.create') }}">{{__('Update Post')}}</a></li>
+
             </ol>
         </nav>
     </div>
@@ -22,7 +22,7 @@
                             <a href="{{ route('post.index') }}" type="button" class="btn btn-primary" ><i class="bi bi-reply-fill me-1  "></i> Back to Previous Page</a>
                         </div>
                         <hr class="my-4">
-                        <h4>Update Post</h4>
+                        <h4 class="card-title">Update Post</h4>
                         <form action="{{ route('post.update', $post->id) }}" method="post">
                             @csrf
                             @method('PUT')

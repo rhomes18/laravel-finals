@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
@@ -13,9 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::where('user_id', auth::user()->id)->get();
+        
         return view('resources.post.index', ['posts' => $posts]);
         return view('posts.index', compact('posts'));
+
     }
 
     /**
@@ -33,6 +37,7 @@ class PostController extends Controller
     {
         
         Post::create([
+            'user_id' => auth::user()->id,
             'subject' => $request->subject,
             'post' => $request->post,
             'status' => (is_null($request->status) ? 0 : 1)
@@ -62,6 +67,7 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $post->update([
+            'user_id' => auth::user()->id,
             'subject' => $request->subject,
             'post' => $request->post,
             'status' => (is_null($request->status) ? 0 : 1)
@@ -78,4 +84,18 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('post.index')->with('message', 'Post Successfully Deleted!');
     }
+    public function postIndex(Post $post)
+    {
+        $posts = Post::all();
+        return view('pages.index', ['posts' => $posts]);
+    }
+    
+
+    public function PostShow($id)
+    {
+        $post = Post::with('comments')->findOrFail($id);
+        return new PostResource($post);
+    }
+    
+
 }

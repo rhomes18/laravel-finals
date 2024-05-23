@@ -7,7 +7,7 @@
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{__('Dashboard')}}</a></li>
                 <li class="breadcrumb-item active">{{ __('Resource') }}</li>
                 <li class="breadcrumb-item"><a href="{{ route('post.index') }}">{{__('Post')}}</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('post.create') }}">{{__('Add a New Post')}}</a></li>
+                
             </ol>
         </nav>
     </div>
@@ -22,13 +22,13 @@
                             <a href="{{ route('post.index') }}" type="button" class="btn btn-primary" ><i class="bi bi-reply-fill me-1  "></i> Back to Previous Page</a>
                         </div>
                         <hr class="my-4">
-                        <h4>Add A New Post</h4>
+                        <h4 class="card-title">Add A New Post</h4>
                         <form action="{{ route('post.store') }}" method="post">
                             @csrf
                             <div class="col-sm-10">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control @error('subject') is-invalid @enderror" id="subject" name="subject" placeholder="Subject" />
-                                    <label for="floatingInput">Subject</label>
+                                    <label for="floatingInput" >Subject</label>
                                     @error('subject')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
