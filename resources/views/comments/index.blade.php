@@ -1,7 +1,7 @@
 <x-app-layout>
             
     <div class="pagetitle">
-        <h1>{{ __('Post Page') }}</h1>
+        <h1>{{ __('Comment') }}</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -54,10 +54,10 @@
                                 @foreach($comments as $comment)
                                     <tr>
                                         <td>{{ $comment->comment }}</td>
-                                        <td>{{ optional(optional($comment->post)->user)->name ?? 'user' }}</td>
+                                        <td>{{ optional($comment->user)->name ?? 'user' }}</td>
                                         <td>{{ $comment->status ? 'Approved' : 'Pending' }}</td>
                                         <td style="text-align:center;">
-                                            @if(auth()->id() !== optional($comment->post)->user_id)
+                                            @if(auth()->id() === optional($comment->post)->user_id && auth()->id() !== $comment->user_id)
                                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal{{ $comment->id }}">Approve</button>
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#disapproveModal{{ $comment->id }}">Disapprove</button>
                                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->id }}">Delete</button>
