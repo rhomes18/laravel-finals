@@ -86,7 +86,7 @@ class PostController extends Controller
     }
     public function postIndex(Post $post)
     {
-        $posts = Post::all();
+        $posts = Post::where('status', 1)->get();
         return view('pages.index', ['posts' => $posts]);
     }
     

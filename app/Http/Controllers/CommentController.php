@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Post;
 
 
 class CommentController extends Controller
@@ -42,12 +43,15 @@ class CommentController extends Controller
             'comment' => 'required|string|max:1000',
             'post_id' => 'required|exists:posts,id',
         ]);
+        $post = Post::findOrFail($request->post_id);
+        $approved = auth()->id() === $post->user_id;
 
         Comment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
             'comment' => $request->comment,
-            'status' => false, // assuming you want to set a default status
+            'status' => false,
+            'status' => $approved// assuming you want to set a default status
         ]);
 
         return redirect()->back()->with('success', 'Comment added successfully!');
