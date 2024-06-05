@@ -14,7 +14,10 @@
                     <a href="{{ route('post.index') }}"> <i class="bi bi-circle"></i><span>Posts</span> </a>
                 </li>
                 <li>
-                    <a href="{{ route('comments.index') }}"> <i class="bi bi-circle"></i><span>Post Page</span> </a>
+                    <a href="{{ route('comments.index') }}"> <i class="bi bi-circle"></i><span>Comments</span> </a>
+                </li>
+                <li>
+                    <a href="{{ route('post.postIndex') }}"> <i class="bi bi-circle"></i><span>Post Page</span> </a>
                 </li>
             </ul>
         </li>

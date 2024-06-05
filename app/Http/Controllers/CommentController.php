@@ -47,6 +47,7 @@ class CommentController extends Controller
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
             'comment' => $request->comment,
+            'status' => true, // assuming you want to set a default status
         ]);
 
         return redirect()->back()->with('success', 'Comment added successfully!');

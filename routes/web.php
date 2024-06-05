@@ -20,9 +20,8 @@ use App\Http\Controllers\PostCommentController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [PostController::class, 'postLogin'])->name('post.postLogin');
+Route::get('/', [PostController::class, 'postIndex'])->name('post.postIndex');
 
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/dashboard', function(){
@@ -33,6 +32,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
 
 
     Route::get('/page', [CommentController::class, 'index'])->name('comments.index');
