@@ -96,6 +96,11 @@ class PostController extends Controller
         $post = Post::with('comments')->findOrFail($id);
         return new PostResource($post);
     }
+    public function postLogin(Post $post)
+    {
+        $posts = Post::all();
+        return view('auth.login', ['posts' => $posts]);
+    }
     
 
 }

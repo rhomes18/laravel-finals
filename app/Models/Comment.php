@@ -17,6 +17,7 @@ class Comment extends Model
         'post_id', // Add this line
         'user_id',
         'comment',
+        'status'
         // other fields...
     ];
 
@@ -25,6 +26,10 @@ class Comment extends Model
     public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 
