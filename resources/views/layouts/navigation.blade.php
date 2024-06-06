@@ -1,23 +1,30 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+            <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? '' : 'collapsed' }}">
                 <i class="bi bi-grid"></i>
                 <span>{{ __('Dashboard') }}</span>
             </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#resources-nav" data-bs-toggle="collapse" href="#"> <i class="bi bi-menu-button-wide"></i><span>Resources</span><i class="bi bi-chevron-down ms-auto"></i> </a>
-            <ul id="resources-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <a class="nav-link {{ request()->routeIs('post.index', 'comments.index', 'post.postIndex') ? '' : 'collapsed' }}" data-bs-target="#resources-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i>
+                <span>Resources</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="resources-nav" class="nav-content collapse {{ request()->routeIs('post.index', 'comments.index', 'post.postIndex') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('post.index') }}"> <i class="bi bi-circle"></i><span>Posts</span> </a>
+                    <a href="{{ route('post.index') }}" class="{{ request()->routeIs('post.index') ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>Posts</span>
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ route('comments.index') }}"> <i class="bi bi-circle"></i><span>Comments</span> </a>
+                    <a href="{{ route('comments.index') }}" class="{{ request()->routeIs('comments.index') ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>Comments</span>
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ route('post.postIndex') }}"> <i class="bi bi-circle"></i><span>Post Page</span> </a>
+                    <a href="{{ route('post.postIndex') }}" class="{{ request()->routeIs('post.postIndex') ? 'active' : '' }}">
+                        <i class="bi bi-circle"></i><span>Post Page</span>
+                    </a>
                 </li>
             </ul>
         </li>
